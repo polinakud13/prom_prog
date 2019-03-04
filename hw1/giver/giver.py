@@ -1,13 +1,11 @@
 import pika
 import random
 import time
-import os
 import sys
-params = pika.URLParameters(os.getenv('RABBITMQ_URL'))
 
 while True:
     try:
-        connection = pika.BlockingConnection(params)
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbit'))
         channel = connection.channel()
         
         channel.queue_declare(queue='hello')
